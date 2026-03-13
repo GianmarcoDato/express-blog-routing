@@ -1,0 +1,14 @@
+{
+  "name": "prova-express",
+  "version": "1.0.0",
+  "license": "ISC",
+  "author": "Gianmarco Dato",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node api.js",
+    "dev": "node --watch api.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
