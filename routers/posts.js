@@ -1,7 +1,8 @@
-
+const express = require('express')
+const router = express.Router()
 
 //index (cRud)
-app.get('/posts', (req, res) => {
+router.get('/', (req, res) => {
   const posts = [
   {
     id: 1,
@@ -51,33 +52,34 @@ app.get('/posts', (req, res) => {
 })
 
 //show (cRud)
-app.get('/posts/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   console.log(`Hai chiesto di mostrare il post con ID: ${req.params.id}`)
   res.json(`Hai chiesto di mostrare il post con ID: ${req.params.id}`)
  })
 
 //store (Crud)
-app.post('/posts', (req, res) => {
+router.post('/', (req, res) => {
   console.log("Hai chiesto di creare un nuovo post")
   res.json("hai chiesto di creare un nuovo post")
 })
 
  //update (crUd)
-app.put('/posts/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     console.log(`Hai chiesto di aggiornare il post con ID: ${req.params.id}`)
     res.json(`Hai chiesto di aggiornare il post con ID: ${req.params.id}`)
  })
 
  //modify (crUd)
-app.patch('/posts/:id', (req, res) => {
+router.patch('/:id', (req, res) => {
   console.log(`Hai chiesto di modificare il post con ID: ${req.params.id}`)
   res.json(`Hai chiesto di modificare il post con ID: ${req.params.id}`)
  })
 
  //destroy (cruD)
-app.delete('/posts/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   console.log(`Hai chiesto di eliminare il post con ID: ${req.params.id}`)
   res.json(`Hai chiesto di eliminare il post con ID: ${req.params.id}`)
  
 })
 
+module.exports = router
