@@ -1,12 +1,12 @@
 {
-  "name": "prova-express",
+  "name": "express-blog-routing",
   "version": "1.0.0",
   "license": "ISC",
   "author": "Gianmarco Dato",
   "type": "commonjs",
   "scripts": {
-    "start": "node api.js",
-    "dev": "node --watch api.js"
+    "start": "node app.js",
+    "dev": "node --watch app.js"
   },
   "dependencies": {
     "express": "^5.2.1"
