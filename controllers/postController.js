@@ -34,9 +34,18 @@ function store (req, res) {
 }
 
 function update (req, res) {
-    console.log(`Hai chiesto di aggiornare il post con ID: ${req.params.id}`, req.body)
-    res.json(`Hai chiesto di aggiornare il post con ID: ${req.params.id}`)
+   
+    const result = posts.find(post => post.id === Number(req.params.id))
+    result.title = req.body.title
+    result.content = req.body.content
+    result.image = req.body.image
+    result.tags = req.body.tags
+
+  res.json(result)
+  
+    
  }
+ 
 
  function modify (req, res) {
   console.log(`Hai chiesto di modificare il post con ID: ${req.params.id}`, req.body)
