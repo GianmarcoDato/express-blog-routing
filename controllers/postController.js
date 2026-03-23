@@ -2,7 +2,9 @@
 
 
  function index (req, res) {
+  x.prova();
    res.json(posts)
+   
 }
 
 function show (req, res) {
