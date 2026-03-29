@@ -1,11 +1,21 @@
- const posts = require('../data/posts.data')
+ const dbConnection = require('../data/db')
 
 
  function index (req, res) {
-  x.prova();
-   res.json(posts)
+  const query = 'SELECT * FROM posts'
+
+  dbConnection.query(query, (err, raws) => {
+    if (err) {
+      res.status(500).json({ error: 'db error', message: 'Errore di connessione al database' });
+    }
+    
+  let results = raws
+  if (req.query.tag) {
+    results = raws.filter(post => post.tags.includes(req.query.tag))
+  }
+  res.json(results)
    
-}
+})}
 
 function show (req, res) {
   console.log(`Hai chiesto di mostrare il post con ID: ${req.params.id}`)
@@ -61,4 +71,5 @@ module.exports = {
   store,
   update,
   modify
+  
 }
