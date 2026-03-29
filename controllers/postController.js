@@ -18,15 +18,39 @@
 })}
 
 function show (req, res) {
-  console.log(`Hai chiesto di mostrare il post con ID: ${req.params.id}`)
-  res.json(posts.find(post => post.id === Number(req.params.id)))
+
+  const id = Number(req.params.id)
+  console.log(`Hai chiesto di mostrare il post con ID: ${id}`)
+  if (isNaN(id)) {
+    return res.status(400).json({ error: 'invalid id', message: 'ID non valido' })
+  }
+
+  const query = 'SELECT * FROM posts WHERE id = ?'
+  dbConnection.query(query, id, (err, raws) => {
+    if (err) {
+      res.status(500).json({ error: 'db error', message: 'Errore di connessione al database' });
+    }
+    if (raws.length === 0) {
+      return res.status(404).json({ error: 'not found', message: 'Post non trovato' })
+    }
+    res.json(raws)
+  })
  }
 
 function destroy (req, res) {
-  const result = posts.find(post => post.id === Number(req.params.id))
-  posts.splice(posts.indexOf(result), 1)
-  console.log(`Hai chiesto di eliminare il post con ID: ${req.params.id}`, posts)
-  res.sendStatus(204)
+
+  const id = Number(req.params.id)  
+  if (isNaN(id)) {
+    return res.status(400).json({ error: 'invalid id', message: 'ID non valido' })
+  }
+
+const quesry = 'DELETE FROM posts WHERE id = ?'
+dbConnection.query(quesry, id, (err) => {
+  if (err) {
+    res.status(500).json({ error: 'db error', message: 'Impossibile eliminare il post' })
+  }});
+ return res.sendStatus(204);
+
 }
 
 function store (req, res) {
